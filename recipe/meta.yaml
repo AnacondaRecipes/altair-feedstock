@@ -7,12 +7,10 @@ package:
 source:
   url: https://pypi.io/packages/source/a/altair/altair-{{ version }}.tar.gz
   sha256: 3edd30d4f4bb0a37278b72578e7e60bc72045a8e6704179e2f4738e35bc12931
-
 build:
   number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-
 requirements:
   host:
     - python >=3.6
@@ -38,6 +36,9 @@ test:
     - ipython
     - pip
   commands:
+    # candlestick_chart.py fails for no data
+    - rm -f altair/examples/candlestick_chart.py  # [unix]
+    - del altair/examples/candlestick_chart.py  # [win]
     - pip check
     - python -m pytest --pyargs --doctest-modules altair
   imports:
