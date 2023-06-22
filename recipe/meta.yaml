@@ -40,8 +40,6 @@ test:
     - altair
   requires:
     - pytest
-    - sphinx
-    - docutils
     - vega_datasets
     - ipython
     - pip
