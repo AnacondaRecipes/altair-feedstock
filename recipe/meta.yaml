@@ -23,12 +23,12 @@ requirements:
   run:
     - python
     - importlib-metadata  # [py<38]
-    - typing-extensions >=4.0.1  # [py<311]
     - jinja2
     - jsonschema >=3.0
     - numpy
     - pandas >=0.18
     - toolz
+    - typing-extensions >=4.0.1  # [py<311]
 
 test:
   imports:
@@ -43,7 +43,6 @@ test:
     - sphinx
     - docutils
     - vega_datasets
-    - recommonmark
     - ipython
     - pip
   commands:
