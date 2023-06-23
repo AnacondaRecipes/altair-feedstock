@@ -1,67 +1,61 @@
-{% set version = "4.1.0" %}
+{% set name = "altair" %}
+{% set version = "5.0.1" %}
+
 
 package:
-  name: altair
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/a/altair/altair-{{ version }}.tar.gz
-  sha256: 3edd30d4f4bb0a37278b72578e7e60bc72045a8e6704179e2f4738e35bc12931
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/altair-{{ version }}.tar.gz
+  sha256: 087d7033cb2d6c228493a053e12613058a5d47faf6a36aea3ff60305fd8b4cb0
+
 build:
-  number: 1
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+  skip: true  # [py<37]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
+    - hatchling
+    - wheel
   run:
-    - python >=3.6
-    - entrypoints
+    - python
+    - importlib-metadata  # [py<38]
     - jinja2
-    - jsonschema
-    - numpy >=0.18
-    - pandas
+    - jsonschema >=3.0
+    - numpy
+    - pandas >=0.18
     - toolz
+    - typing-extensions >=4.0.1  # [py<311]
 
 test:
+  imports:
+    - altair
+    - altair.expr
+    - altair.utils
+    - altair.vegalite
   source_files:
     - altair
   requires:
     - pytest
-    - sphinx
-    - docutils
     - vega_datasets
-    - recommonmark
     - ipython
     - pip
   commands:
-    # candlestick_chart.py fails for no data
-    - rm -f altair/examples/candlestick_chart.py  # [unix]
-    - del altair/examples/candlestick_chart.py  # [win]
     - pip check
     - python -m pytest --pyargs --doctest-modules altair
-  imports:
-    - altair
-    - altair.examples
-    - altair.expr
-    - altair.sphinxext
-    - altair.tests
-    - altair.utils
-    - altair.vega
-    - altair.vega.v5
-    - altair.vega.v5.schema
-    - altair.vegalite
-    - altair.vegalite.v3
-    - altair.vegalite.v3.schema
-    - altair.vegalite.v4
-    - altair.vegalite.v4.schema
 
 about:
-  home: http://altair-viz.github.io
+  home: https://altair-viz.github.io
+  dev_url: https://github.com/altair-viz/altair
+  doc_url: https://altair-viz.github.io/
   license: BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE
-  summary: 'Altair: A declarative statistical visualization library for Python'
+  summary: A declarative statistical visualization library for Python
+  description: A declarative statistical visualization library for Python
 
 extra:
   recipe-maintainers:
