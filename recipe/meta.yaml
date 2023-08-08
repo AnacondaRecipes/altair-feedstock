@@ -31,14 +31,27 @@ requirements:
 test:
   imports:
     - altair
+    - altair.examples
     - altair.expr
+    - altair.sphinxext
+    - altair.tests
     - altair.utils
+    - altair.vega
+    - altair.vega.v5
+    - altair.vega.v5.schema
     - altair.vegalite
+    - altair.vegalite.v3
+    - altair.vegalite.v3.schema
+    - altair.vegalite.v4
+    - altair.vegalite.v4.schema
   source_files:
     - altair
   requires:
     - pytest
-    - vega_datasets
+    - sphinx
+    - docutils
+    - vega_datasets >=0.8
+    - recommonmark
     - ipython
     - pip
   commands:
