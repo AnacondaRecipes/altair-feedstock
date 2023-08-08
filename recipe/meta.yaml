@@ -21,13 +21,12 @@ requirements:
     - wheel
   run:
     - python
-    - importlib-metadata  # [py<38]
     - jinja2
-    - jsonschema >=3.0
+    - jsonschema >=3.0,<4.17
     - numpy
     - pandas >=0.18
     - toolz
-    - typing-extensions >=4.0.1  # [py<311]
+    - entrypoints
 
 test:
   imports:
