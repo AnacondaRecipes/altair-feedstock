@@ -1,7 +1,6 @@
 {% set name = "altair" %}
 {% set version = "4.2.2" %}
 
-
 package:
   name: {{ name|lower }}
   version: {{ version }}
