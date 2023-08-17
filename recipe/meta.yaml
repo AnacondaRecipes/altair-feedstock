@@ -56,6 +56,7 @@ test:
   commands:
     - pip check
     # Temporarily skipping tests that use openSSL on Windows.
+    # See https://github.com/AnacondaRecipes/openssl-feedstock/pull/21
     - python -m pytest --pyargs --doctest-modules altair  # [not win]
     - python -m pytest --pyargs --doctest-modules altair --ignore=altair/examples/tests/test_examples.py  # [win]
 
