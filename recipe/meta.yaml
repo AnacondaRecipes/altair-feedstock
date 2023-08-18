@@ -21,7 +21,7 @@ requirements:
   run:
     - python
     - jinja2
-    - jsonschema >=3.0,<4.17
+    - jsonschema >=3.0
     - numpy
     - pandas >=0.18
     - toolz
