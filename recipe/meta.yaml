@@ -47,19 +47,18 @@ test:
   source_files:
     - altair
   requires:
-  # Missing futures for python 3.13; Required for recommonmark
-    {% if py<313 %}
     - pytest
     - sphinx
     - docutils
     - vega_datasets >=0.8
-    - recommonmark
+  # Missing futures for python 3.13; Required for recommonmark
+    - recommonmark  # [py<313]
     - ipython
-    {% endif %}
     - pip
   commands:
     - pip check
     - python -m pytest --pyargs --doctest-modules altair  # [py<313]
+    - python -m pytest --pyargs --doctest-modules altair  --ignore="altair/sphinxext/altairgallery.py" --ignore="altair/sphinxext/schematable.py"  # [py>=313]
 
 about:
   home: https://altair-viz.github.io
