@@ -47,19 +47,19 @@ test:
   source_files:
     - altair
   requires:
+  # Missing futures for python 3.13; Required for recommonmark
+    {% if py>=313 %}
     - pytest
     - sphinx
     - docutils
     - vega_datasets >=0.8
     - recommonmark
     - ipython
+    {% endif %}
     - pip
   commands:
     - pip check
-    # Temporarily skipping tests that use openSSL on Windows.
-    # See https://github.com/AnacondaRecipes/openssl-feedstock/pull/21
-    - python -m pytest --pyargs --doctest-modules altair  # [not win]
-    - python -m pytest --pyargs --doctest-modules altair --ignore=altair/examples/tests/test_examples.py  # [win]
+    - python -m pytest --pyargs --doctest-modules altair  # [py>=313]
 
 about:
   home: https://altair-viz.github.io
