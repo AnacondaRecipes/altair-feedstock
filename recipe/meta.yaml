@@ -48,7 +48,7 @@ test:
     - altair
   requires:
   # Missing futures for python 3.13; Required for recommonmark
-    {% if py>=313 %}
+    {% if py<313 %}
     - pytest
     - sphinx
     - docutils
