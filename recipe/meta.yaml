@@ -10,7 +10,7 @@ source:
   sha256: 39399a267c49b30d102c10411e67ab26374156a84b1aeb9fcd15140429ba49c5
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<37]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 requirements:
@@ -51,15 +51,14 @@ test:
     - sphinx
     - docutils
     - vega_datasets >=0.8
-    - recommonmark
+  # Missing futures for python 3.13; Required for recommonmark
+    - recommonmark  # [py<313]
     - ipython
     - pip
   commands:
     - pip check
-    # Temporarily skipping tests that use openSSL on Windows.
-    # See https://github.com/AnacondaRecipes/openssl-feedstock/pull/21
-    - python -m pytest --pyargs --doctest-modules altair  # [not win]
-    - python -m pytest --pyargs --doctest-modules altair --ignore=altair/examples/tests/test_examples.py  # [win]
+    - python -m pytest --pyargs --doctest-modules altair  # [py<313]
+    - python -m pytest --pyargs --doctest-modules altair  --ignore="altair/sphinxext/altairgallery.py" --ignore="altair/sphinxext/schematable.py"  # [py>=313]
 
 about:
   home: https://altair-viz.github.io
