@@ -45,7 +45,6 @@ test:
     - docutils
     - vega_datasets >=0.9.0
     - anywidget >=0.9.0
-    - recommonmark
     - ipython
     - pip
   commands:
