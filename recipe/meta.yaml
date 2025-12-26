@@ -50,12 +50,14 @@ test:
     - anywidget
     - ipython
     # TODO: polars is not available on the main channel for py314. We should add it back when it is available.
-    #- polars
+    - polars  # [py<314]
     - pip
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest --pyargs --doctest-modules altair
+    - pytest --pyargs --doctest-modules altair  # [py<314]
+    # TODO: We need to ignore the datasets/_data.py file for py314 because polars is not available on the main channel for py314.
+    - pytest --pyargs --doctest-modules altair --ignore=datasets/_data.py  # [py==314]
 
 about:
   home: https://github.com/vega/altair
