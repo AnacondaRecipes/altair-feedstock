@@ -43,19 +43,20 @@ test:
   source_files:
     - altair
   requires:
+    - docutils
+    - ipython
+    - pip
     - pytest
     - sphinx
-    - docutils
     - vega_datasets
-    - anywidget
-    - ipython
+    # TODO: anywidget is not available on win-64 for py314.
+    - anywidget  # [unix]
     # TODO: polars is not available on the main channel for py314. We should add it back when it is available.
     - polars  # [py<314]
-    - pip
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -vv --pyargs --doctest-modules altair  # [py<314]
+    - pytest -vv --pyargs --doctest-modules altair  # [py<314 and unix]
 
 about:
   home: https://github.com/vega/altair
