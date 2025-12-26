@@ -55,9 +55,9 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest --pyargs --doctest-modules altair  # [py<314]
+    - pytest -vv --pyargs --doctest-modules altair  # [py<314]
     # TODO: We need to ignore the datasets/_data.py file for py314 because polars is not available on the main channel for py314.
-    - pytest --pyargs --doctest-modules altair --ignore=datasets/_data.py  # [py==314]
+    - pytest -vv --pyargs altair --ignore=datasets/_data.py  # [py==314]
 
 about:
   home: https://github.com/vega/altair
