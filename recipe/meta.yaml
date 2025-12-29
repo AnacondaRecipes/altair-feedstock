@@ -10,7 +10,7 @@ source:
   sha256: 614bf5ecbe2337347b590afb111929aa9c16c9527c4887d96c9bc7f6640756b4
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<39]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -43,18 +43,20 @@ test:
   source_files:
     - altair
   requires:
+    - docutils
+    - ipython
+    - pip
     - pytest
     - sphinx
-    - docutils
     - vega_datasets
-    - anywidget
-    - ipython
-    - polars
-    - pip
+    # TODO: anywidget is not available on win-64 for py314.
+    - anywidget  # [unix]
+    # TODO: polars is not available on the main channel for py314. We should add it back when it is available.
+    - polars  # [py<314]
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest --pyargs --doctest-modules altair
+    - pytest -vv --pyargs --doctest-modules altair  # [py<314 and unix]
 
 about:
   home: https://github.com/vega/altair
@@ -66,6 +68,7 @@ about:
   summary: A declarative statistical visualization library for Python
   description: |
     A declarative statistical visualization library for Python.
+
 
 extra:
   recipe-maintainers:
