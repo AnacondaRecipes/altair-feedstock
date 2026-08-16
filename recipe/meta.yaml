@@ -1,23 +1,23 @@
 {% set name = "altair" %}
-{% set version = "6.0.0" %}
+{% set version = "6.2.2" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 614bf5ecbe2337347b590afb111929aa9c16c9527c4887d96c9bc7f6640756b4
+  sha256: a1ff9d9cfe81c75414641826312b9471780e19d39293ba0b012933f6b6cba0fe
 
 build:
-  number: 1
-  skip: true  # [py<39]
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<310]
 
 requirements:
   host:
-    - python
     - pip
+    - python
     - hatchling
   run:
     - python
@@ -25,7 +25,7 @@ requirements:
     - jinja2
     - jsonschema >=3.0
     - packaging
-    - narwhals >=1.27.1
+    - narwhals >=2.4.0
   run_constrained:
     - vl-convert-python >=1.8.0
     - pandas >=1.1.3
