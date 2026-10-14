@@ -72,17 +72,6 @@ about:
   description: |
     A declarative statistical visualization library for Python.
 
-
-
-
-
-
-
-
-
-
-
-
 extra:
   recipe-maintainers:
     - ellisonbg
