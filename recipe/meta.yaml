@@ -1,5 +1,5 @@
 {% set name = "altair" %}
-{% set version = "6.2.2" %}
+{% set version = "6.3.0" %}
 
 package:
   name: {{ name }}
@@ -7,18 +7,19 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a1ff9d9cfe81c75414641826312b9471780e19d39293ba0b012933f6b6cba0fe
+  sha256: fa632121aca6d0fcb198a3d8a9f7d937fa5b7518ec947951cfffb44e736d97c8
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: true  # [py<310]
+  skip: true  # [py<311]
 
 requirements:
   host:
     - pip
     - python
     - hatchling
+    - versioningit
   run:
     - python
     - typing_extensions >=4.12.0  # [py<315]
@@ -27,8 +28,10 @@ requirements:
     - packaging
     - narwhals >=2.4.0
   run_constrained:
-    - vl-convert-python >=1.8.0
-    - pandas >=1.1.3
+    # save
+    - vl-convert-python >=1.9.0
+    # all
+    - pandas >=1.5.3
     - pyarrow >=11
     - vegafusion >=2.0.3
     - anywidget >=0.9.0
@@ -68,7 +71,6 @@ about:
   summary: A declarative statistical visualization library for Python
   description: |
     A declarative statistical visualization library for Python.
-
 
 extra:
   recipe-maintainers:
